@@ -4,6 +4,10 @@ A modern landing page template optimized for **AI-driven development**. Clone, o
 
 Built with [Astro](https://astro.build/) + [React](https://react.dev/) + [shadcn/ui](https://ui.shadcn.com/) (Base UI) + [Tailwind CSS v4](https://tailwindcss.com/). Ships as static HTML. Deploys with Docker + nginx + Traefik.
 
+| Desktop | Mobile |
+|---------|--------|
+| ![Desktop screenshot](fullpage-screenshot.png) | ![Mobile screenshot](fullpage-mobile-screenshot.png) |
+
 ## Quick Start
 
 ```bash

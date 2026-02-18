@@ -4,6 +4,10 @@
 
 Построен на [Astro](https://astro.build/) + [React](https://react.dev/) + [shadcn/ui](https://ui.shadcn.com/) (Base UI) + [Tailwind CSS v4](https://tailwindcss.com/). Генерирует статический HTML. Деплоится через Docker + nginx + Traefik.
 
+| Десктоп | Мобильная версия |
+|---------|-----------------|
+| ![Скриншот десктоп](fullpage-screenshot.png) | ![Скриншот мобильная версия](fullpage-mobile-screenshot.png) |
+
 ## Быстрый старт
 
 ```bash
