@@ -1,0 +1,45 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  headline: string;
+  subtext: string;
+  primaryCTA: { label: string; href: string };
+  secondaryCTA?: { label: string; href: string };
+  image?: string;
+}
+
+const { headline, subtext, primaryCTA, secondaryCTA, image } = Astro.props;
+---
+
+<section class="container mx-auto px-4 py-24 md:py-32">
+  <div class="mx-auto max-w-3xl text-center">
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+      {headline}
+    </h1>
+    <p class="mt-6 text-lg text-muted-foreground md:text-xl">
+      {subtext}
+    </p>
+    <div class="mt-10 flex items-center justify-center gap-4">
+      <a href={primaryCTA.href} class={cn(buttonVariants({ size: "lg" }))}>
+        {primaryCTA.label}
+      </a>
+      {secondaryCTA && (
+        <a href={secondaryCTA.href} class={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+          {secondaryCTA.label}
+        </a>
+      )}
+    </div>
+  </div>
+  {image && (
+    <div class="mt-16 mx-auto max-w-5xl">
+      <img
+        src={image}
+        alt=""
+        class="rounded-lg border shadow-2xl"
+        loading="eager"
+      />
+    </div>
+  )}
+</section>
