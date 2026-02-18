@@ -1,0 +1,51 @@
+---
+import { Card, CardContent } from "@/components/ui/card";
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  avatar?: string;
+}
+
+interface Props {
+  headline?: string;
+  subtext?: string;
+  testimonials: Testimonial[];
+}
+
+const {
+  headline = "What people are saying",
+  subtext = "Hear from our customers",
+  testimonials,
+} = Astro.props;
+---
+
+<section id="testimonials" class="container mx-auto px-4 py-24">
+  <div class="mx-auto max-w-2xl text-center mb-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{headline}</h2>
+    <p class="mt-4 text-lg text-muted-foreground">{subtext}</p>
+  </div>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {testimonials.map((t) => (
+      <Card>
+        <CardContent className="pt-6">
+          <blockquote class="text-muted-foreground">"{t.quote}"</blockquote>
+          <div class="mt-4 flex items-center gap-3">
+            {t.avatar ? (
+              <img src={t.avatar} alt={t.author} class="h-10 w-10 rounded-full" />
+            ) : (
+              <div class="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-sm font-medium">
+                {t.author.charAt(0)}
+              </div>
+            )}
+            <div>
+              <p class="text-sm font-medium">{t.author}</p>
+              <p class="text-xs text-muted-foreground">{t.role}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</section>

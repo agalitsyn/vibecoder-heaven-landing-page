@@ -1,0 +1,57 @@
+---
+import { Separator } from "@/components/ui/separator";
+
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterColumn {
+  title: string;
+  links: FooterLink[];
+}
+
+interface Props {
+  logo?: string;
+  columns?: FooterColumn[];
+  copyright?: string;
+}
+
+const {
+  logo = "Brand",
+  columns = [],
+  copyright = `\u00A9 ${new Date().getFullYear()} Brand. All rights reserved.`,
+} = Astro.props;
+---
+
+<footer class="border-t">
+  <div class="container mx-auto px-4 py-12">
+    {columns.length > 0 ? (
+      <div class="grid gap-8 md:grid-cols-4">
+        <div>
+          <p class="text-lg font-bold">{logo}</p>
+        </div>
+        {columns.map((col) => (
+          <div>
+            <p class="text-sm font-semibold mb-3">{col.title}</p>
+            <ul class="space-y-2">
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="flex items-center justify-between">
+        <p class="text-lg font-bold">{logo}</p>
+      </div>
+    )}
+    <Separator className="my-8" />
+    <p class="text-sm text-muted-foreground text-center">{copyright}</p>
+  </div>
+</footer>

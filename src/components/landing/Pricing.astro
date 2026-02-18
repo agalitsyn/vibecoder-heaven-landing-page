@@ -1,0 +1,68 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+
+interface PricingTier {
+  name: string;
+  price: string;
+  description: string;
+  features: string[];
+  cta: { label: string; href: string };
+  highlighted?: boolean;
+}
+
+interface Props {
+  headline?: string;
+  subtext?: string;
+  tiers: PricingTier[];
+}
+
+const {
+  headline = "Pricing",
+  subtext = "Choose the plan that works for you",
+  tiers,
+} = Astro.props;
+---
+
+<section id="pricing" class="container mx-auto px-4 py-24">
+  <div class="mx-auto max-w-2xl text-center mb-16">
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{headline}</h2>
+    <p class="mt-4 text-lg text-muted-foreground">{subtext}</p>
+  </div>
+  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+    {tiers.map((tier) => (
+      <Card class:list={[tier.highlighted && "border-primary shadow-lg relative"]}>
+        {tier.highlighted && (
+          <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Popular</Badge>
+        )}
+        <CardHeader>
+          <CardTitle>{tier.name}</CardTitle>
+          <CardDescription>{tier.description}</CardDescription>
+          <p class="text-4xl font-bold mt-4">{tier.price}</p>
+        </CardHeader>
+        <CardContent>
+          <ul class="space-y-2">
+            {tier.features.map((feature) => (
+              <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                <span class="text-primary">&#10003;</span> {feature}
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+        <CardFooter>
+          <a
+            href={tier.cta.href}
+            class={cn(
+              buttonVariants({ variant: tier.highlighted ? "default" : "outline" }),
+              "w-full"
+            )}
+          >
+            {tier.cta.label}
+          </a>
+        </CardFooter>
+      </Card>
+    ))}
+  </div>
+</section>
