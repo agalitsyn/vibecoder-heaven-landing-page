@@ -1,8 +1,76 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/landing/Navbar.astro';
+import Hero from '../components/landing/Hero.astro';
+import Features from '../components/landing/Features.astro';
+import Pricing from '../components/landing/Pricing.astro';
+import Testimonials from '../components/landing/Testimonials.astro';
+import CTA from '../components/landing/CTA.astro';
+import Footer from '../components/landing/Footer.astro';
 ---
-<BaseLayout title="Landing Page Template">
-  <main class="flex min-h-screen items-center justify-center">
-    <h1 class="text-4xl font-bold">Landing Page Template</h1>
-  </main>
+
+<BaseLayout title="Landing Page Template" description="A modern landing page template built with Astro, React, and shadcn/ui">
+  <Navbar />
+  <Hero
+    headline="Build beautiful landing pages in minutes"
+    subtext="A modern template powered by Astro, React, and shadcn/ui. Clone, customize, deploy."
+    primaryCTA={{ label: "Get Started", href: "#pricing" }}
+    secondaryCTA={{ label: "Learn More", href: "#features" }}
+  />
+  <Features
+    features={[
+      { icon: "⚡", title: "Lightning Fast", description: "Static HTML with zero JavaScript by default. Your pages load instantly." },
+      { icon: "🎨", title: "Beautiful Components", description: "Built on shadcn/ui with Base UI primitives. Accessible and customizable." },
+      { icon: "📱", title: "Fully Responsive", description: "Looks great on every device, from mobile to desktop." },
+      { icon: "🐳", title: "Docker Ready", description: "Multi-stage Dockerfile with nginx. Deploy anywhere with one command." },
+      { icon: "🔒", title: "Auto TLS", description: "Traefik handles HTTPS with Let's Encrypt. Zero configuration SSL." },
+      { icon: "🧩", title: "Composable", description: "Mix and match sections. Each component is self-contained and optional." },
+    ]}
+  />
+  <Pricing
+    tiers={[
+      {
+        name: "Starter",
+        price: "$0",
+        description: "For personal projects",
+        features: ["1 landing page", "Basic components", "Community support"],
+        cta: { label: "Start Free", href: "#" },
+      },
+      {
+        name: "Pro",
+        price: "$29",
+        description: "For growing businesses",
+        features: ["Unlimited pages", "All components", "Priority support", "Custom domains"],
+        cta: { label: "Go Pro", href: "#" },
+        highlighted: true,
+      },
+      {
+        name: "Enterprise",
+        price: "$99",
+        description: "For large teams",
+        features: ["Everything in Pro", "Custom branding", "SLA guarantee", "Dedicated support"],
+        cta: { label: "Contact Us", href: "#" },
+      },
+    ]}
+  />
+  <Testimonials
+    testimonials={[
+      { quote: "This template saved us weeks of development time. The components are beautiful and easy to customize.", author: "Alex Chen", role: "CTO, StartupCo" },
+      { quote: "Finally a landing page template that doesn't ship megabytes of JavaScript. Our Lighthouse scores are perfect.", author: "Sarah Kim", role: "Lead Developer, WebAgency" },
+      { quote: "The Docker + Traefik setup is exactly what we needed. Deploy a new landing page in minutes.", author: "Mike Johnson", role: "DevOps Engineer, ScaleUp" },
+    ]}
+  />
+  <CTA
+    headline="Ready to build your landing page?"
+    subtext="Clone the template, customize the content, and deploy in minutes."
+    primaryCTA={{ label: "Get the Template", href: "#" }}
+    secondaryCTA={{ label: "View on GitHub", href: "#" }}
+  />
+  <Footer
+    columns={[
+      { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }] },
+      { title: "Company", links: [{ label: "About", href: "#" }, { label: "Blog", href: "#" }] },
+      { title: "Legal", links: [{ label: "Privacy", href: "#" }, { label: "Terms", href: "#" }] },
+    ]}
+  />
 </BaseLayout>
