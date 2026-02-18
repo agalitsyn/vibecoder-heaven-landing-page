@@ -1,45 +1,82 @@
 ---
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import AuroraBackground from "./AuroraBackground.tsx";
+import HeroAnimations from "./HeroAnimations.tsx";
 
 interface Props {
-  headline: string;
-  subtext: string;
-  primaryCTA: { label: string; href: string };
+  tagline?: string;
+  primaryCTA?: { label: string; href: string };
   secondaryCTA?: { label: string; href: string };
-  image?: string;
+  backgroundImage?: string;
 }
 
-const { headline, subtext, primaryCTA, secondaryCTA, image } = Astro.props;
+const {
+  tagline = "ENGINEERED FOR THE ELEMENTS",
+  primaryCTA = { label: "Shop Collection", href: "#collection" },
+  secondaryCTA = { label: "Our Story", href: "#about" },
+  backgroundImage = "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80",
+} = Astro.props;
 ---
 
-<section class="container mx-auto px-4 py-24 md:py-32">
-  <div class="mx-auto max-w-3xl text-center">
-    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-      {headline}
-    </h1>
-    <p class="mt-6 text-lg text-muted-foreground md:text-xl">
-      {subtext}
+<section class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+  <!-- Aurora WebGL background (desktop only) -->
+  <AuroraBackground client:load />
+
+  <!-- Background image with gradient overlay -->
+  <div class="absolute inset-0 z-10">
+    <img
+      src={backgroundImage}
+      alt="Mountain landscape"
+      class="h-full w-full object-cover"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30"></div>
+  </div>
+
+  <!-- Content overlay -->
+  <div class="relative z-20 container mx-auto px-4 text-center flex flex-col items-center gap-6 md:gap-8">
+    <!-- Tagline badge -->
+    <span class="inline-block px-4 py-1.5 text-xs sm:text-sm font-semibold tracking-[0.25em] text-primary border border-primary/30 rounded-full backdrop-blur-sm bg-primary/5">
+      {tagline}
+    </span>
+
+    <!-- Animated headline (SplitText + RotatingText) -->
+    <HeroAnimations client:load />
+
+    <!-- Subtitle -->
+    <p class="max-w-xl text-base sm:text-lg text-muted-foreground font-body">
+      Premium outdoor apparel built to withstand nature's toughest challenges.
+      From alpine peaks to forest trails.
     </p>
-    <div class="mt-10 flex items-center justify-center gap-4">
-      <a href={primaryCTA.href} class={cn(buttonVariants({ size: "lg" }))}>
+
+    <!-- CTA buttons -->
+    <div class="flex items-center gap-4 mt-2">
+      <a
+        href={primaryCTA.href}
+        class={cn(
+          buttonVariants({ size: "lg" }),
+          "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base px-8"
+        )}
+      >
         {primaryCTA.label}
       </a>
-      {secondaryCTA && (
-        <a href={secondaryCTA.href} class={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
-          {secondaryCTA.label}
-        </a>
-      )}
+      <a
+        href={secondaryCTA.href}
+        class={cn(
+          buttonVariants({ variant: "outline", size: "lg" }),
+          "border-foreground/20 text-foreground hover:bg-foreground/10 font-semibold text-base px-8"
+        )}
+      >
+        {secondaryCTA.label}
+      </a>
     </div>
   </div>
-  {image && (
-    <div class="mt-16 mx-auto max-w-5xl">
-      <img
-        src={image}
-        alt=""
-        class="rounded-lg border shadow-2xl"
-        loading="eager"
-      />
-    </div>
-  )}
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-xs tracking-widest text-muted-foreground uppercase">Scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent"></div>
+  </div>
 </section>

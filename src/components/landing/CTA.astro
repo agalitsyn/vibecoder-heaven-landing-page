@@ -1,35 +1,62 @@
 ---
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import CTAReveal from "./CTAReveal.tsx";
 
 interface Props {
   headline?: string;
   subtext?: string;
-  primaryCTA?: { label: string; href: string };
-  secondaryCTA?: { label: string; href: string };
+  backgroundImage?: string;
 }
 
 const {
-  headline = "Ready to get started?",
-  subtext = "Join thousands of satisfied customers today.",
-  primaryCTA = { label: "Get Started", href: "#" },
-  secondaryCTA,
+  headline = "JOIN THE EXPEDITION",
+  subtext = "Get early access to new collections, expedition stories, and member-only gear drops.",
+  backgroundImage = "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80",
 } = Astro.props;
 ---
 
-<section id="cta" class="border-t bg-muted/50">
-  <div class="container mx-auto px-4 py-24 text-center">
-    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">{headline}</h2>
-    <p class="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">{subtext}</p>
-    <div class="mt-10 flex items-center justify-center gap-4">
-      <a href={primaryCTA.href} class={cn(buttonVariants({ size: "lg" }))}>
-        {primaryCTA.label}
+<section id="cta" class="relative py-32 md:py-40 overflow-hidden">
+  <!-- Background image -->
+  <div class="absolute inset-0">
+    <img
+      src={backgroundImage}
+      alt=""
+      class="h-full w-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-background/85"></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-4 text-center flex flex-col items-center gap-6">
+    <!-- Animated headline -->
+    <CTAReveal client:visible text={headline} />
+
+    <p class="max-w-lg text-base sm:text-lg text-muted-foreground font-body mt-2">
+      {subtext}
+    </p>
+
+    <!-- Email signup -->
+    <form class="mt-4 flex flex-col sm:flex-row items-center gap-3 w-full max-w-md" onsubmit="return false;">
+      <input
+        type="email"
+        placeholder="your@email.com"
+        class="flex-1 w-full sm:w-auto h-12 rounded-lg border border-border bg-background/50 backdrop-blur-sm px-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+      />
+      <a
+        href="#"
+        class={cn(
+          buttonVariants({ size: "lg" }),
+          "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-12 px-8 whitespace-nowrap"
+        )}
+      >
+        Subscribe
       </a>
-      {secondaryCTA && (
-        <a href={secondaryCTA.href} class={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
-          {secondaryCTA.label}
-        </a>
-      )}
-    </div>
+    </form>
+
+    <p class="text-xs text-muted-foreground/60">
+      No spam. Unsubscribe anytime.
+    </p>
   </div>
 </section>

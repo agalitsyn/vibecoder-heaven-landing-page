@@ -1,5 +1,5 @@
 ---
-import { Separator } from "@/components/ui/separator";
+import { Mountain, Instagram, Youtube } from "lucide-react";
 
 interface FooterLink {
   label: string;
@@ -12,46 +12,96 @@ interface FooterColumn {
 }
 
 interface Props {
-  logo?: string;
   columns?: FooterColumn[];
-  copyright?: string;
 }
 
 const {
-  logo = "Brand",
-  columns = [],
-  copyright = `\u00A9 ${new Date().getFullYear()} Brand. All rights reserved.`,
+  columns = [
+    {
+      title: "Shop",
+      links: [
+        { label: "Alpine Shells", href: "#" },
+        { label: "Base Layers", href: "#" },
+        { label: "Trail Packs", href: "#" },
+        { label: "Accessories", href: "#" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "Our Story", href: "#" },
+        { label: "Expeditions", href: "#" },
+        { label: "Sustainability", href: "#" },
+        { label: "Careers", href: "#" },
+      ],
+    },
+    {
+      title: "Support",
+      links: [
+        { label: "Size Guide", href: "#" },
+        { label: "Shipping", href: "#" },
+        { label: "Returns", href: "#" },
+        { label: "Contact", href: "#" },
+      ],
+    },
+  ],
 } = Astro.props;
 ---
 
-<footer class="border-t">
-  <div class="container mx-auto px-4 py-12">
-    {columns.length > 0 ? (
-      <div class="grid gap-8 md:grid-cols-4">
-        <div>
-          <p class="text-lg font-bold">{logo}</p>
+<footer class="bg-background pt-16 pb-8">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      <!-- Brand column -->
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="font-display text-3xl text-white tracking-wide">SUMMIT</a>
+        <p class="mt-3 text-sm text-muted-foreground font-body max-w-xs">
+          Engineered for the elements. Premium outdoor apparel since 1987.
+        </p>
+        <!-- Social icons -->
+        <div class="flex items-center gap-4 mt-5">
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors" aria-label="Instagram">
+            <Instagram className="h-5 w-5" />
+          </a>
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors" aria-label="YouTube">
+            <Youtube className="h-5 w-5" />
+          </a>
+          <a href="#" class="text-muted-foreground hover:text-foreground transition-colors" aria-label="Summit">
+            <Mountain className="h-5 w-5" />
+          </a>
         </div>
-        {columns.map((col) => (
-          <div>
-            <p class="text-sm font-semibold mb-3">{col.title}</p>
-            <ul class="space-y-2">
-              {col.links.map((link) => (
-                <li>
-                  <a href={link.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
       </div>
-    ) : (
-      <div class="flex items-center justify-between">
-        <p class="text-lg font-bold">{logo}</p>
+
+      <!-- Link columns -->
+      {columns.map((col) => (
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
+            {col.title}
+          </p>
+          <ul class="space-y-2.5">
+            {col.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-foreground/70 hover:text-foreground transition-colors font-body"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-muted-foreground/50">
+        &copy; {new Date().getFullYear()} SUMMIT. All rights reserved.
+      </p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors">Privacy</a>
+        <a href="#" class="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors">Terms</a>
       </div>
-    )}
-    <Separator className="my-8" />
-    <p class="text-sm text-muted-foreground text-center">{copyright}</p>
+    </div>
   </div>
 </footer>

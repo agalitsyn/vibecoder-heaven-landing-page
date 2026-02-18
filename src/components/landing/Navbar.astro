@@ -4,34 +4,41 @@ import { cn } from "@/lib/utils";
 import MobileNav from "./MobileNav.tsx";
 
 interface Props {
-  logo?: string;
   links?: Array<{ label: string; href: string }>;
   cta?: { label: string; href: string };
 }
 
 const {
-  logo = "Brand",
   links = [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Testimonials", href: "#testimonials" },
+    { label: "Collection", href: "#collection" },
+    { label: "About", href: "#about" },
+    { label: "Support", href: "#support" },
   ],
-  cta = { label: "Get Started", href: "#cta" },
+  cta = { label: "Shop Now", href: "#collection" },
 } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header class="fixed top-0 z-50 w-full bg-background/40 backdrop-blur-md">
   <nav class="container mx-auto flex h-16 items-center justify-between px-4">
-    <a href="/" class="text-xl font-bold">{logo}</a>
+    <a href="/" class="font-display text-2xl text-white tracking-wide">SUMMIT</a>
 
     <!-- Desktop links -->
-    <div class="hidden md:flex items-center gap-6">
+    <div class="hidden md:flex items-center gap-8">
       {links.map((link) => (
-        <a href={link.href} class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+        <a
+          href={link.href}
+          class="text-sm font-medium text-foreground/60 hover:text-foreground transition-colors tracking-wide font-body"
+        >
           {link.label}
         </a>
       ))}
-      <a href={cta.href} class={cn(buttonVariants({ variant: "default" }))}>
+      <a
+        href={cta.href}
+        class={cn(
+          buttonVariants({ size: "sm" }),
+          "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-sm px-5"
+        )}
+      >
         {cta.label}
       </a>
     </div>

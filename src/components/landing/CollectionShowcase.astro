@@ -1,0 +1,105 @@
+---
+import ScrollMarquee from "./ScrollMarquee.tsx";
+import AnimatedReveal from "./AnimatedReveal.tsx";
+import StatsBlur from "./StatsBlur.tsx";
+
+interface CollectionItem {
+  name: string;
+  description: string;
+  image: string;
+  href: string;
+  span?: boolean; // spans 2 rows in grid
+}
+
+interface Stat {
+  text: string;
+}
+
+interface Props {
+  collections?: CollectionItem[];
+  stats?: Stat[];
+}
+
+const {
+  collections = [
+    {
+      name: "Alpine Shells",
+      description: "Waterproof protection for the harshest conditions",
+      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80",
+      href: "#",
+      span: true,
+    },
+    {
+      name: "Base Layers",
+      description: "Merino-blend thermals for every season",
+      image: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800&q=80",
+      href: "#",
+    },
+    {
+      name: "Trail Packs",
+      description: "Ultralight gear that goes the distance",
+      image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=800&q=80",
+      href: "#",
+    },
+  ],
+  stats = [
+    { text: "150+ Expeditions Supported" },
+    { text: "12 Countries" },
+    { text: "Since 1987" },
+  ],
+} = Astro.props;
+---
+
+<section id="collection" class="py-12 md:py-20">
+  <!-- ScrollVelocity marquee -->
+  <div class="mb-12 md:mb-16 overflow-hidden">
+    <ScrollMarquee client:visible />
+  </div>
+
+  <!-- Collection grid -->
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      {collections.map((item, i) => (
+        <AnimatedReveal
+          client:visible
+          delay={i * 0.15}
+          className={item.span ? "md:row-span-2" : ""}
+        >
+          <a
+            href={item.href}
+            class={`group relative block overflow-hidden rounded-lg ${item.span ? "h-[400px] md:h-full" : "h-[300px] md:h-[320px]"}`}
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <h3 class="font-display text-2xl md:text-3xl text-white uppercase tracking-wide">
+                {item.name}
+              </h3>
+              <p class="mt-1 text-sm text-white/70 font-body">{item.description}</p>
+              <span class="inline-block mt-3 text-sm font-semibold text-primary tracking-wide group-hover:translate-x-1 transition-transform">
+                Explore →
+              </span>
+            </div>
+          </a>
+        </AnimatedReveal>
+      ))}
+    </div>
+
+    <!-- Stats bar -->
+    <div class="mt-16 md:mt-20 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+      {stats.map((stat) => (
+        <StatsBlur
+          client:visible
+          text={stat.text}
+          className="font-display text-xl md:text-2xl text-muted-foreground uppercase tracking-wider text-center"
+        />
+      ))}
+    </div>
+  </div>
+</section>
