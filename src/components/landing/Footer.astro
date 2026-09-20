@@ -1,5 +1,6 @@
 ---
-import { Mountain, Instagram, Youtube } from "lucide-react";
+import { Mountain } from "lucide-react";
+import { SiInstagram, SiYoutube } from "@icons-pack/react-simple-icons";
 
 interface FooterLink {
   label: string;
@@ -60,10 +61,10 @@ const {
         <!-- Social icons -->
         <div class="flex items-center gap-4 mt-5">
           <a href="#" class="text-muted-foreground hover:text-foreground transition-colors" aria-label="Instagram">
-            <Instagram className="h-5 w-5" />
+            <SiInstagram className="h-5 w-5" />
           </a>
           <a href="#" class="text-muted-foreground hover:text-foreground transition-colors" aria-label="YouTube">
-            <Youtube className="h-5 w-5" />
+            <SiYoutube className="h-5 w-5" />
           </a>
           <a href="#" class="text-muted-foreground hover:text-foreground transition-colors" aria-label="Summit">
             <Mountain className="h-5 w-5" />

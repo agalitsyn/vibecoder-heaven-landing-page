@@ -32,12 +32,14 @@ Claude has access to shadcn/ui and Astro documentation via MCP servers (pre-conf
 
 | Layer | Tool | Why |
 |-------|------|-----|
-| Framework | [Astro 5](https://astro.build/) | Static site generator — zero JS by default, blazing fast |
+| Framework | [Astro 7](https://astro.build/) | Static site generator — zero JS by default, blazing fast |
 | UI library | [React 19](https://react.dev/) | Used for interactive components (islands) |
 | Components | [shadcn/ui](https://ui.shadcn.com/) | Copy-paste components you own and customize |
 | Primitives | [Base UI](https://base-ui.com/) | Headless primitives from the creators of Radix + MUI |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com/) | CSS-first config, `@theme` blocks in CSS |
 | Icons | [Lucide React](https://lucide.dev/) | Beautiful, consistent icon set |
+| Brand icons | [Simple Icons](https://simpleicons.org/) | Social/brand marks, dropped from lucide in v1 |
+| Class merging | [`cn`](https://github.com/shadcn-ui/cn) | Compiled replacement for clsx + tailwind-merge |
 | Serving | nginx (alpine) | Lightweight static file server |
 | Routing | [Traefik v3](https://traefik.io/) | Reverse proxy with auto TLS via Let's Encrypt |
 
@@ -63,8 +65,6 @@ src/
 │       └── Footer.astro     # Multi-column footer
 ├── layouts/
 │   └── BaseLayout.astro     # HTML head, meta, global styles
-├── lib/
-│   └── utils.ts             # cn() utility for Tailwind classes
 ├── styles/
 │   └── global.css           # Tailwind imports + theme variables
 └── pages/

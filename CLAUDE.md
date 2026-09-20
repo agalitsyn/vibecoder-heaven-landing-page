@@ -7,10 +7,10 @@
 
 ## Tech Stack
 
-- **Framework:** Astro 5.x (static site generator)
+- **Framework:** Astro 7.x (static site generator)
 - **UI:** React 19 + shadcn/ui with Base UI primitives (`"style": "base-vega"` in components.json)
 - **Styling:** Tailwind CSS v4 (CSS-first config in `src/styles/global.css`)
-- **Icons:** Lucide React
+- **Icons:** Lucide React. Brand icons (Instagram, YouTube, ...) were removed in lucide v1 — take those from `@icons-pack/react-simple-icons` (`SiInstagram`, `SiYoutube`)
 - **Package manager:** pnpm
 
 ## Architecture
@@ -20,6 +20,7 @@
 - Only components needing interactivity use `client:visible` or `client:load`
 - For static links styled as buttons, use `buttonVariants()` utility with `<a>` tags — do not use the React `<Button>` component
 - Base UI uses `render` prop instead of Radix's `asChild`
+- `cn()` comes from the `cn` package (`import { cn } from "cn"`), shadcn's compiled replacement for clsx + tailwind-merge. There is no local `src/lib/utils.ts`
 
 ## Commands
 

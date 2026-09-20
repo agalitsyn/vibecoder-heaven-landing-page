@@ -32,12 +32,14 @@ Claude имеет доступ к документации shadcn/ui и Astro ч
 
 | Уровень | Инструмент | Зачем |
 |---------|-----------|-------|
-| Фреймворк | [Astro 5](https://astro.build/) | Генератор статических сайтов — ноль JS по умолчанию, молниеносная загрузка |
+| Фреймворк | [Astro 7](https://astro.build/) | Генератор статических сайтов — ноль JS по умолчанию, молниеносная загрузка |
 | UI-библиотека | [React 19](https://react.dev/) | Для интерактивных компонентов (островов) |
 | Компоненты | [shadcn/ui](https://ui.shadcn.com/) | Копируемые компоненты, которые вы полностью контролируете |
 | Примитивы | [Base UI](https://base-ui.com/) | Headless-примитивы от создателей Radix + MUI |
 | Стили | [Tailwind CSS v4](https://tailwindcss.com/) | CSS-first конфигурация, блоки `@theme` в CSS |
 | Иконки | [Lucide React](https://lucide.dev/) | Красивый, консистентный набор иконок |
+| Брендовые иконки | [Simple Icons](https://simpleicons.org/) | Иконки соцсетей и брендов, убранные из lucide в v1 |
+| Склейка классов | [`cn`](https://github.com/shadcn-ui/cn) | Скомпилированная замена clsx + tailwind-merge |
 | Раздача | nginx (alpine) | Легковесный сервер статических файлов |
 | Маршрутизация | [Traefik v3](https://traefik.io/) | Обратный прокси с авто-TLS через Let's Encrypt |
 
@@ -63,8 +65,6 @@ src/
 │       └── Footer.astro     # Многоколоночный футер
 ├── layouts/
 │   └── BaseLayout.astro     # HTML head, мета-теги, глобальные стили
-├── lib/
-│   └── utils.ts             # Утилита cn() для Tailwind-классов
 ├── styles/
 │   └── global.css           # Импорты Tailwind + переменные темы
 └── pages/
