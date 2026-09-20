@@ -4,7 +4,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 import { Menu } from "lucide-react";
 
 interface MobileNavProps {
